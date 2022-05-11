@@ -7,9 +7,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser"); // 處理get,post,... request 取得 req.body
 const Serie = require("./models/serie");
 const keccak256 = require("keccak256");
-const cors = require("cors");
-const nowTime = Math.round(new Date() / 1000);
-const exipreTime = nowTime + 120;
+// const cors = require("cors");
+
 // const corsOptions = {
 //   origin: "https://test-soul-nft.netlify.app/Mint",
 //   credentials: true, //access-control-allow-credentials:true
@@ -18,7 +17,6 @@ const exipreTime = nowTime + 120;
 
 //Middleware
 // app.use(cors());
-app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true })); // 處理get,post,... request 取得 req.body
 
@@ -38,6 +36,8 @@ mongoose
   });
 
 app.post("/", cors(), (req, res) => {
+  const nowTime = Math.round(new Date() / 1000);
+  const exipreTime = nowTime + 120;
   let { account, serie } = req.body;
   let hashSerie = keccak256(serie).toString("hex");
   Serie.findOne({ serie: hashSerie })
@@ -68,6 +68,6 @@ app.get("/*", (req, res) => {
   res.send("Not allowed.");
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server is running on port 3000.");
+app.listen(process.env.PORT || 8080, () => {
+  console.log("Server is running on port 8080.");
 });
