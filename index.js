@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser"); // 處理get,post,... request 取得 req.body
 const Serie = require("./models/serie");
 const keccak256 = require("keccak256");
-// const cors = require("cors");
+const cors = require("cors");
 
 // const corsOptions = {
 //   origin: "https://test-soul-nft.netlify.app/Mint",
